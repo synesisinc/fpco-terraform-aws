@@ -11,11 +11,6 @@ variable "instance_type" {
   description = "The type of the EC2 instance to use (needs to be at least t2.medium)"
 }
 
-variable "instance_ami" {
-  default     = "ami-cd0f5cb6"
-  description = "The EC2 image to use"
-}
-
 variable "security_group_ids" {
   type        = "list"
   description = "The security groups to use for instances"
@@ -94,4 +89,9 @@ variable "gitlab_http_port" {
 variable "gitlab_https_port" {
   default     = "443"
   description = "The port to use for https access to the gitlab instance"
+}
+
+variable "is_govcloud" {
+  description = "If this is running on GovCloud or not"
+  default     = false
 }

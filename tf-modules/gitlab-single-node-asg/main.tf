@@ -23,7 +23,7 @@ module "gitlab-asg" {
   az                      = "${var.az}"
   key_name                = "${var.key_name}"
   key_file                = "${var.key_file}"
-  ami                     = "${var.instance_ami}"
+  ami                     = "${module.ubuntu-ami.id}"
   instance_type           = "${var.instance_type}"
   name_suffix             = "gitlab-asg"
   subnet_id               = "${var.subnet_id}"
@@ -64,6 +64,12 @@ cmd="docker run --detach \
 echo "$cmd" > /etc/rc.local
 $cmd
 END_INIT
+}
+
+module "ubuntu-ami" {
+  source      = "../ami-ubuntu"
+  release     = "16.04"
+  is_govcloud = "${var.is_govcloud}"
 }
 
 module "init-install-awscli" {
