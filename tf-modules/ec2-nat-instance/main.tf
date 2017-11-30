@@ -20,7 +20,7 @@ module "ubuntu-ami" {
 
 # boxed module to update the EC2 node's hostname
 module "init-nat-hostname" {
-  source = "../init-snippet-hostname-simple"
+  source          = "../init-snippet-hostname-simple"
   hostname_prefix = "ec2-nat"
 }
 
@@ -29,7 +29,8 @@ module "init-nat-hostname" {
 # this code needs to escape through (terraform, init/bash/echo, shell)
 module "init-nat-config-iptables" {
   source = "../init-snippet-exec"
-  init   = <<END_INIT
+
+  init = <<END_INIT
 # write out script to setup nat
 echo '#!/bin/sh
 echo 1 > /proc/sys/net/ipv4/ip_forward
